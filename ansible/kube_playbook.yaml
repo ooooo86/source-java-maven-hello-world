@@ -1,0 +1,27 @@
+- name: Build and Push Docker Image
+  hosts: ansible_host
+
+  tasks:
+  - name: Build Docker Image
+    command: docker image build -t dockerjwhong/mywebapp .
+  - name: Login to Docker Hub
+    command: docker login
+  - name: Push Image to Docker Hub
+    command: docker push dockerjwhong/mywebapp
+  - name: Remove Local Image
+    command: docker image rm dockerjwhong/mywebapp tomcat:9-jdk11
+
+- name: Run Kube Run
+  hosts: kube_host
+
+  tasks:
+  - name: Delete deployment,pod
+    command: kubectl delete -f deployment.yaml
+    ignore_errors: true
+  - name: Delete Service
+    command: kubectl delete -f service.yaml
+    ignore_errors: true
+  - name: Run Deployment
+    command: kubectl create -f deployment.yaml
+  - name: Run Service
+    command: kubectl create -f service.yaml
