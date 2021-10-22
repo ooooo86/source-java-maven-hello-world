@@ -1,0 +1,8 @@
+- name: Run Kube Run
+  hosts: kube_host
+  gather_facts: no
+
+  tasks:
+  - name: Update & Create
+    command: kubectl create -f .
+    ignore_errors: true
