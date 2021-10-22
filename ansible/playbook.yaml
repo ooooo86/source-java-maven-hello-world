@@ -3,13 +3,13 @@
 
   tasks:
   - name: Build Docker Image
-  command: docker image build -t dockerjwhong/mywebapp .
+    command: docker image build -t dockerjwhong/mywebapp .
   - name: Login to Docker Hub
-  command: docker login
+    command: docker login
   - name: Push Image to Docker Hub
-  command: docker push dockerjwhong/mywebapp
+    command: docker push dockerjwhong/mywebapp
   - name: Remove Local Image
-  command: docker image rm dockerjwhong/mywebapp tomcat:9-jdk11
+    command: docker image rm dockerjwhong/mywebapp tomcat:9-jdk11
 
 - name: Run Docker Container
   hosts: docker_host
