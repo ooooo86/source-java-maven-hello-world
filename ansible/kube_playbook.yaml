@@ -1,5 +1,6 @@
 - name: Build and Push Docker Image
   hosts: ansible_host
+  gather_facts: no
 
   tasks:
   - name: Build Docker Image
@@ -13,6 +14,7 @@
 
 - name: Run Kube Run
   hosts: kube_host
+  gather_facts: no
 
   tasks:
   - name: Delete deployment,pod
